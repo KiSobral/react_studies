@@ -4,7 +4,7 @@ import "./CurrencySelector.css";
 export default class CurrencySelector extends Component {
   render() {
     return (
-      <select className="currencySelector" id="currencySelector">
+      <select className="currencySelector">
         <option value="AED">AED</option>
         <option value="AFN">AFN</option>
         <option value="ALL">ALL</option>
