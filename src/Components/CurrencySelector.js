@@ -2,9 +2,24 @@ import React, { Component } from "react";
 import "./CurrencySelector.css";
 
 export default class CurrencySelector extends Component {
+  constructor(props) {
+    super(props);
+    this.state = { value: "BRL" };
+
+    this.handleChange = this.handleChange.bind(this);
+  }
+
+  handleChange(event) {
+    this.setState({ value: event.target.value });
+  }
+
   render() {
     return (
-      <select className="currencySelector">
+      <select
+        className="currencySelector"
+        value={this.state.value}
+        onChange={this.handleChange}
+      >
         <option value="AED">AED</option>
         <option value="AFN">AFN</option>
         <option value="ALL">ALL</option>
