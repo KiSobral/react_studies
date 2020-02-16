@@ -8,9 +8,9 @@ export default class Converter extends Component {
     super(props);
     this.state = {
       currencyA: "BRL",
-      currencyAValue: "",
-      currencyB: "BRl",
-      currencyBValue: 0,
+      currencyAValue: "1",
+      currencyB: "BRL",
+      currencyBValue: 0
     };
 
     this.convertCurrencies = this.convertCurrencies.bind(this);
@@ -21,14 +21,17 @@ export default class Converter extends Component {
     let countries = `${this.state.currencyA}_${this.state.currencyB}`;
     let url = `https://free.currconv.com/api/v7/convert?q=${countries}&compact=ultra&apiKey=${apiKey}`;
 
-    fetch(url).then(res => {
-      return res.json()
+    fetch(url)
+      .then(res => {
+        return res.json();
+      })
+      .then(json => {
+        let val = json[countries];
+        let result = (val * parseFloat(this.state.currencyAValue)).toFixed(2);
+        this.setState({ currencyBValue: result });
 
-    }).then(json => {
-      let result = (json[countries].val * parseFloat(this.state.cujson[countries].val * parseFloat(this.state.currencyAValue)rrencyAValue)).toFixed(2)
-      this.setState({currencyBValue: result})
-      
-    })
+        return;
+      });
   }
 
   render() {
@@ -37,6 +40,8 @@ export default class Converter extends Component {
         <CurrencySelector />
         <h4> TO </h4>
         <CurrencySelector />
+        <h1> {this.state.currencyBValue} </h1>
+        <button onClick={this.convertCurrencies}> Convert </button>
       </div>
     );
   }
