@@ -2,14 +2,16 @@ import React, { Component } from "react";
 import "./Converter.css";
 
 import CurrencySelector from "./CurrencySelector";
+import Button from "@material-ui/core/Button";
+import TextField from "@material-ui/core/TextField";
 
 export default class Converter extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      fromCurrency: "BRL",
-      fromCurrencyValue: "1",
-      toCurrency: "BRL",
+      fromCurrency: "",
+      fromCurrencyValue: "",
+      toCurrency: "",
       toCurrencyValue: 0
     };
 
@@ -50,17 +52,34 @@ export default class Converter extends Component {
   render() {
     return (
       <div className="sheet">
-        <CurrencySelector parentCallBack={this.fromCurrencyCallBack} />
-        <h4> TO </h4>
-        <CurrencySelector parentCallBack={this.toCurrencyCallBack} />
-        <input
-          type="text"
-          onChange={event => {
-            this.setState({ fromCurrencyValue: event.target.value });
-          }}
-        />
-        <button onClick={this.convertCurrencies}> Convert </button>
-        <h1> {this.state.toCurrencyValue} </h1>
+        <div className="sheet-header">
+          <CurrencySelector
+            parentCallBack={this.fromCurrencyCallBack}
+            label="from"
+          />
+          <div className="justify-center">
+            <b> TO </b>
+          </div>
+          <CurrencySelector
+            parentCallBack={this.toCurrencyCallBack}
+            label="to"
+          />
+        </div>
+
+        <div className="sheet-body">
+          <TextField
+            onChange={event => {
+              this.setState({ fromCurrencyValue: event.target.value });
+            }}
+          />
+          <Button variant="outlined" onClick={this.convertCurrencies}>
+            <b>CONVERT</b>
+          </Button>
+        </div>
+
+        <div className="result">
+          <b> $ {this.state.toCurrencyValue} </b>
+        </div>
       </div>
     );
   }

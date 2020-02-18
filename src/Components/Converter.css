@@ -1,2 +1,52 @@
 .sheet {
+  background-color: rgb(140, 221, 59);
+  min-width: 650px;
+  min-height: 34vh;
+  border-radius: 40px;
+  display: flex;
+  flex-direction: column;
+}
+
+.sheet-header {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  margin: auto;
+}
+
+.justify-center {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 0px 65px 0px 65px;
+}
+
+.justify-center > b {
+  color: #3b3a3a;
+  font-size: 20px;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+    Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+}
+
+.sheet-body {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.sheet-body > button {
+  height: 36px !important;
+}
+
+.result {
+  margin-top: 30px;
+  padding-bottom: 20px;
+}
+
+.result > b {
+  color: white;
+  font-size: 55px;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+    Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
 }
