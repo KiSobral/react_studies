@@ -53,8 +53,14 @@ export default class Converter extends Component {
         <CurrencySelector parentCallBack={this.fromCurrencyCallBack} />
         <h4> TO </h4>
         <CurrencySelector parentCallBack={this.toCurrencyCallBack} />
-        <h1> {this.state.toCurrencyValue} </h1>
+        <input
+          type="text"
+          onChange={event => {
+            this.setState({ fromCurrencyValue: event.target.value });
+          }}
+        />
         <button onClick={this.convertCurrencies}> Convert </button>
+        <h1> {this.state.toCurrencyValue} </h1>
       </div>
     );
   }
