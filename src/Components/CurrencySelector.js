@@ -11,6 +11,7 @@ export default class CurrencySelector extends Component {
 
   handleChange(event) {
     this.setState({ value: event.target.value });
+    this.props.parentCallBack(event.target.value);
   }
 
   render() {

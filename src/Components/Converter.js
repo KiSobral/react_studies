@@ -7,19 +7,31 @@ export default class Converter extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      currencyA: "BRL",
-      currencyAValue: "1",
-      currencyB: "BRL",
-      currencyBValue: 0
+      fromCurrency: "BRL",
+      fromCurrencyValue: "1",
+      toCurrency: "BRL",
+      toCurrencyValue: 0
     };
 
     this.convertCurrencies = this.convertCurrencies.bind(this);
+    this.fromCurrencyCallBack = this.fromCurrencyCallBack.bind(this);
+    this.toCurrencyCallBack = this.toCurrencyCallBack.bind(this);
+  }
+
+  fromCurrencyCallBack(childData) {
+    this.setState({ fromCurrency: childData });
+  }
+
+  toCurrencyCallBack(childData) {
+    this.setState({ toCurrency: childData });
   }
 
   convertCurrencies() {
     let apiKey = "c9cce1ef9e7daffed841";
-    let countries = `${this.state.currencyA}_${this.state.currencyB}`;
-    let url = `https://free.currconv.com/api/v7/convert?q=${countries}&compact=ultra&apiKey=${apiKey}`;
+    let countries = `${this.state.fromCurrency}_${this.state.toCurrency}`;
+    let url =
+      `https://free.currconv.com/api/v7/convert?q=${countries}` +
+      `&compact=ultra&apiKey=${apiKey}`;
 
     fetch(url)
       .then(res => {
@@ -27,8 +39,9 @@ export default class Converter extends Component {
       })
       .then(json => {
         let val = json[countries];
-        let result = (val * parseFloat(this.state.currencyAValue)).toFixed(2);
-        this.setState({ currencyBValue: result });
+        let res = (val * parseFloat(this.state.fromCurrencyValue)).toFixed(2);
+
+        this.setState({ toCurrencyValue: res });
 
         return;
       });
@@ -37,10 +50,10 @@ export default class Converter extends Component {
   render() {
     return (
       <div className="sheet">
-        <CurrencySelector />
+        <CurrencySelector parentCallBack={this.fromCurrencyCallBack} />
         <h4> TO </h4>
-        <CurrencySelector />
-        <h1> {this.state.currencyBValue} </h1>
+        <CurrencySelector parentCallBack={this.toCurrencyCallBack} />
+        <h1> {this.state.toCurrencyValue} </h1>
         <button onClick={this.convertCurrencies}> Convert </button>
       </div>
     );
